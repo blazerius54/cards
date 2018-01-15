@@ -1,0 +1,23 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.board img {
+  /* max-width: 50%; */
+  /* flex: 1 1 10% */
+}
+
+.img-container {
+  width: 226px;
+  height: 314px;
+  border: 1px solid black;
+}

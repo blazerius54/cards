@@ -13,13 +13,16 @@
 
 let arr = [
     {
-        x:1
+        x:1,
+        y: 10
     },
     {
-        x:2
+        x:2,
+        y: 10
     },
     {
-        x:3
+        x:3,
+        y: 10
     },
 ];
 // let arr2 = arr.slice(); 
@@ -35,6 +38,9 @@ function foo() {
     
 }
 
-document.getElementById('btn').addEventListener('click', foo)
+document.getElementById('btn').addEventListener('click', foo);
+
+arr.forEach((obj)=>{obj.y=false})
+console.log(arr)
 </script>
 </html>

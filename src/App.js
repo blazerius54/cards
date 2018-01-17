@@ -42,7 +42,8 @@ class App extends Component {
     this.state = {
       selectedImages: imagesMain,
       pickedCards: [],
-      isPickedCardsFull: false
+      isPickedCardsFull: false,
+      // finalArray: this.state.selectedImages.filter((card)=>{return card}) !!!!!!!!!!!!!
     }
   
     this.flipp = this.flipp.bind(this)
@@ -51,7 +52,7 @@ class App extends Component {
   setImagesMain() {
     let indexArr = [];
     for (let i = 0; i < images.length; i++) {
-      images[i] = { src: null, isFlipped: false,};
+      images[i] = { src: null, isFlipped: true,};
       let rndNum = Math.floor(Math.random() * imagesSRC.length)
       if (indexArr.includes(rndNum)) {
         rndNum = Math.floor(Math.random() * imagesSRC.length);
@@ -72,10 +73,18 @@ class App extends Component {
 
   componentWillMount() {
     this.setImagesMain.bind(this)()
+    setTimeout(() => {
+      let temproraryImg = JSON.parse(JSON.stringify(this.state.selectedImages));
+      temproraryImg.forEach((item) => { item.isFlipped = false });
+      this.setState({
+        selectedImages: temproraryImg
+      })
+    }, 5000)
   }
 
   componentDidMount() {
     this.randomizeCards.bind(this)()
+    console.log('loaded')
   }
 
   randomizeCards() {
@@ -149,8 +158,16 @@ class App extends Component {
       let timer = setTimeout(()=>{
         if(this.state.pickedCards.length === 2 ) {
           if(this.state.pickedCards[0].src===this.state.pickedCards[1].src) {
-            clearTimeout(timer)
+            clearTimeout(timer);
+            let oldPickedCards = this.state.pickedCards;
+            oldPickedCards[0].src = null;
+            oldPickedCards[1].src = null;
             this.setState({
+              pickedCards: oldPickedCards
+            });
+            this.setState({
+              // selectedImages: this.state.selectedImages.filter((card)=>{return !card.isFlipped}),              
+              // selectedImages: this.state.selectedImages.filter((card)=>{return !card.isFlipped}),              
               pickedCards: [], 
               isPickedCardsFull: false
             })
@@ -179,7 +196,7 @@ class App extends Component {
       <div className="App">
         {/* для массива */}
         <div className='board'>
-            {
+            {this.state.selectedImages!==undefined?
               this.state.selectedImages.map((item, index)=>{
                 return (
                   <Card 
@@ -191,7 +208,7 @@ class App extends Component {
                   setPickedCard={this.setPickedCard.bind(this)}
                   />
                 )
-              })
+              }):'blo'
             }
         </div>
         <button 

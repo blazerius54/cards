@@ -40,10 +40,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isGameOn: false,
+      gameOver: false,
+      score: 0,
       selectedImages: imagesMain,
       pickedCards: [],
       isPickedCardsFull: false,
-      // finalArray: this.state.selectedImages.filter((card)=>{return card}) !!!!!!!!!!!!!
+      finalArray: [],
+      openedCards: [],
+      isFirstGame: true
     }
   
     this.flipp = this.flipp.bind(this)
@@ -73,6 +78,21 @@ class App extends Component {
 
   componentWillMount() {
     this.setImagesMain.bind(this)()
+  }
+  
+  startTheGame() {
+    if(!this.state.isFirstGame) {
+      this.setImagesMain.bind(this)();
+      this.randomizeCards.bind(this)();
+      
+      this.setState({
+        finalArray: this.state.selectedImages.filter((card) => { return card.src }),
+        gameOver: false
+      })
+    }
+    this.setState({
+      isGameOn: true
+    })
     setTimeout(() => {
       let temproraryImg = JSON.parse(JSON.stringify(this.state.selectedImages));
       temproraryImg.forEach((item) => { item.isFlipped = false });
@@ -83,7 +103,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.randomizeCards.bind(this)()
+    this.randomizeCards.bind(this)();
+    this.setState({
+      finalArray: this.state.selectedImages.filter((card) => { return card.src })
+    })
     console.log('loaded')
   }
 
@@ -126,15 +149,32 @@ class App extends Component {
   setPickedCard (card, i) {
     let oldSelectedImages = this.state.selectedImages;    
 
-    this.flipTheCard.bind(this)(i)
+    this.flipTheCard.bind(this)(i);
     
     this.setState({
       pickedCards: [...this.state.pickedCards, oldSelectedImages[i]]      
     })
     
-    this.checkArray.bind(this)(i)
+    this.checkArray.bind(this)(i);
   }
   
+  checkIsGameOver () {
+    if(this.state.openedCards.length === this.state.selectedImages.length) {
+      this.setState({
+        isGameOn: false,
+        gameOver: true,
+        isFirstGame: false,
+
+        score: 0,
+        selectedImages: imagesMain,
+        pickedCards: [],
+        isPickedCardsFull: false,
+        finalArray: [],
+        openedCards: [],
+      })
+    }
+  }
+
   checkArray (i) {
     if(this.state.pickedCards.length === 2) {
       this.setState({
@@ -162,12 +202,17 @@ class App extends Component {
             let oldPickedCards = this.state.pickedCards;
             oldPickedCards[0].src = null;
             oldPickedCards[1].src = null;
+            
             this.setState({
-              pickedCards: oldPickedCards
+              score: this.state.score + this.state.finalArray.length * 42,
+              pickedCards: oldPickedCards,
+              finalArray: this.state.selectedImages.filter((card) => { return card.src }),
+              openedCards: this.state.selectedImages.filter((card) => { return card.isFlipped }),
+              
             });
             this.setState({
               // selectedImages: this.state.selectedImages.filter((card)=>{return !card.isFlipped}),              
-              // selectedImages: this.state.selectedImages.filter((card)=>{return !card.isFlipped}),              
+              // selectedImages: this.state.selectedImages.filter((card)=>{return !card.isFlipped}), 
               pickedCards: [], 
               isPickedCardsFull: false
             })
@@ -178,43 +223,65 @@ class App extends Component {
             oldSelectedImages[1].isFlipped = false;
             
             this.setState({
+              score: this.state.score - this.state.openedCards.length * 42,                                         
               pickedCards: [], 
               isPickedCardsFull: false
             })
           }
         }
-      }, 2000)
+        this.checkIsGameOver.bind(this)();    
+        
+      }, 1000)
       
-    }
-    if(this.state.pickedCards.length === 2){
     }
   }
 
-
-  render() {
-    return (
-      <div className="App">
-        {/* для массива */}
+  renderGame () {
+      return (
+        <div className='game'>
         <div className='board'>
-            {this.state.selectedImages!==undefined?
-              this.state.selectedImages.map((item, index)=>{
-                return (
-                  <Card 
+          {this.state.selectedImages !== undefined ?
+            this.state.selectedImages.map((item, index) => {
+              return (
+                <Card
                   key={index}
                   index={index}
                   src={item.src}
                   isFlipped={item.isFlipped}
-                  // setImagesMain={this.setImagesMain.bind(this)}
                   setPickedCard={this.setPickedCard.bind(this)}
-                  />
-                )
-              }):'blo'
-            }
+                />
+              )
+            }) : 'blo'
+          }
         </div>
-        <button 
-        onClick={this.randomizeCards.bind(this)}
-        >click</button>
+        <div>
+          <p>Очки: {this.state.score}</p>
+        </div>
+      </div>
+      )
+  }
 
+  renderStartBtn () {
+      return ( 
+        <button
+        onClick={this.startTheGame.bind(this)}
+        >Начать</button>
+      )
+    
+  }
+
+  renderGameOver () {
+      return (
+        <p>{this.state.score}</p>
+      )
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {this.state.isGameOn? this.renderGame(): ''}
+        {!this.state.isGameOn? this.renderStartBtn(): ''}
+        {this.state.gameOver? this.renderGameOver(): ''}
       </div>
     );
   }

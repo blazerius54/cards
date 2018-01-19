@@ -4,20 +4,44 @@
   padding: 0;
 }
 
+body{
+  background: #1C7430;
+}
+
+.game {
+  width: 80%;
+  margin: 30px auto;
+}
+
 .board {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 80%;
 }
 
 .board img {
-  /* max-width: 50%; */
-  /* flex: 1 1 10% */
+  max-width: 90%;
+  max-height: 90%;
+  /* margin: 20px; */
 }
 
 .img-container {
-  width: 226px;
-  height: 314px;
+  flex: 1 1 15%;
+  /* width: 106px; */
+  height: 180px;
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  font-family: OpenSans-Semibold;
+  font-size: 20px;
+  color: #FFFFFF;
+  /* letter-spacing: -0.25px; */
 }

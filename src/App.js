@@ -33,7 +33,7 @@ function importAll(r) {
 let imagesSRC = importAll(require.context('./images', false, /\.(png|jpe?g)$/));
 let imagesMain
 let images = [];
-images.length = 4;
+images.length = 9;
 
 
 class App extends Component {
@@ -87,7 +87,8 @@ class App extends Component {
       
       this.setState({
         finalArray: this.state.selectedImages.filter((card) => { return card.src }),
-        gameOver: false
+        gameOver: false,
+        score: 0
       })
     }
     this.setState({
@@ -164,8 +165,6 @@ class App extends Component {
         isGameOn: false,
         gameOver: true,
         isFirstGame: false,
-
-        score: 0,
         selectedImages: imagesMain,
         pickedCards: [],
         isPickedCardsFull: false,
@@ -236,31 +235,46 @@ class App extends Component {
     }
   }
 
+  resetGame() {
+    this.setImagesMain.bind(this)()
+    this.startTheGame.bind(this)()
+        this.setState({
+          isFirstGame: false,
+          finalArray: [],
+          pickedCards: [],
+          openedCards: [],
+          score: 0
+        })
+  }
+
   renderGame () {
       return (
         <div className='game'>
-        <div className='board'>
-          {this.state.selectedImages !== undefined ?
-            this.state.selectedImages.map((item, index) => {
-              return (
-                <Card
-                  key={index}
-                  index={index}
-                  src={item.src}
-                  isFlipped={item.isFlipped}
-                  setPickedCard={this.setPickedCard.bind(this)}
-                />
-              )
-            }) : 'blo'
-          }
+          <div className='game-info'>
+            <p>Очки: {this.state.score}</p>
+            <button
+            onClick={this.resetGame.bind(this)}
+            >Начать заново</button>
+          </div>
+          <div className='board'>
+            {this.state.selectedImages !== undefined ?
+              this.state.selectedImages.map((item, index) => {
+                return (
+                  <Card
+                    key={index}
+                    index={index}
+                    src={item.src}
+                    isFlipped={item.isFlipped}
+                    setPickedCard={this.setPickedCard.bind(this)}
+                  />
+                )
+              }) : ''
+            }
+          </div>
         </div>
-        <div>
-          <p>Очки: {this.state.score}</p>
-        </div>
-      </div>
       )
   }
-
+  
   renderStartBtn () {
       return ( 
         <button

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Card from './components/card'
+import startGame from './images/other/StartGame.png'
+
 // function shuffle(array) {
 //   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -277,9 +279,13 @@ class App extends Component {
   
   renderStartBtn () {
       return ( 
-        <button
-        onClick={this.startTheGame.bind(this)}
-        >Начать</button>
+        <div className='start-div'>
+          <img src={startGame}/>
+          <span>MEMORY GAME</span>
+          <button
+          onClick={this.startTheGame.bind(this)}
+          >Начать</button>
+        </div>
       )
     
   }

@@ -8,6 +8,18 @@ body{
   background: #1C7430;
 }
 
+#root {
+  
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  
+}
+
 .game {
   width: 80%;
   margin: 30px auto;
@@ -44,4 +56,35 @@ body{
   font-size: 20px;
   color: #FFFFFF;
   /* letter-spacing: -0.25px; */
+}
+
+.start-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-div * {
+  margin-bottom: 20px; 
+}
+
+.start-div span {
+ color: white;
+ font-size: 28px;
+}
+
+.start-div {
+  font-family: OpenSans-Bold;
+  color: #1C7430;
+  letter-spacing: 0;
+}
+
+.start-div button {
+  font-size: 16px;
+  width: 30%;
+  opacity: 0.85;
+  background: #FFFFFF;
+  border-radius: 4px;
+  height: 30px;
+  
 }

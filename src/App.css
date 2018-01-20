@@ -58,28 +58,28 @@ body{
   /* letter-spacing: -0.25px; */
 }
 
-.start-div {
+.start-div, .game-over-div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.start-div * {
+.start-div *, .game-over-div * {
   margin-bottom: 20px; 
 }
 
-.start-div span {
+.start-div span, .game-over-div p {
  color: white;
  font-size: 28px;
 }
 
-.start-div {
+.start-div, .game-over-div {
   font-family: OpenSans-Bold;
   color: #1C7430;
   letter-spacing: 0;
 }
 
-.start-div button {
+.start-div button, .game-over-div button {
   font-size: 16px;
   width: 30%;
   opacity: 0.85;

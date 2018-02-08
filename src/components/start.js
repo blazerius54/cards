@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import startGame from '../images/other/StartGame.png'
 
 class Start extends Component {
-    startGame() {
+    startTheGame() {
         this.props.startTheGame()
     }
     render () {
@@ -11,7 +11,7 @@ class Start extends Component {
             <img src={startGame} alt=''/>
             <span>MEMORY GAME</span>
             <button
-            onClick={this.startGame.bind(this)}
+            onClick={this.startTheGame.bind(this)}
             >Начать
             </button>
         </div>)

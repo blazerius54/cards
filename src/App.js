@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import Start from './components/start'
 import Card from './components/card'
 import startGame from './images/other/StartGame.png'
 import endGame from './images/other/Group2.png'
-
 // function shuffle(array) {
 //   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -293,7 +293,7 @@ class App extends Component {
   renderStartBtn () {
       return ( 
         <div className='start-div'>
-          <img src={startGame}/>
+          <img src={startGame} alt=''/>
           <span>MEMORY GAME</span>
           <button
           onClick={this.startTheGame.bind(this)}
@@ -306,7 +306,7 @@ class App extends Component {
   renderGameOver () {
       return (
         <div className='game-over-div'>
-          <img src={endGame}/>        
+          <img src={endGame} alt=''/>        
           <p>Поздравляем!</p>
           <p>Ваш итоговый счёт: {this.state.score}</p>
           <button
@@ -320,7 +320,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.isGameOn? this.renderGame(): ''}
-        {this.state.isFirstGame? this.renderStartBtn(): ''}
+        {this.state.isFirstGame? <Start startTheGame={this.startTheGame.bind(this)}/>: ''}
         {this.state.gameOver? this.renderGameOver(): ''}
       </div>
     );

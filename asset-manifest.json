@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.e8945a40.css",
-  "main.css.map": "static/css/main.e8945a40.css.map",
-  "main.js": "static/js/main.95b9ce20.js",
-  "main.js.map": "static/js/main.95b9ce20.js.map",
+  "main.css": "static/css/main.24326854.css",
+  "main.css.map": "static/css/main.24326854.css.map",
+  "main.js": "static/js/main.ce9a14ff.js",
+  "main.js.map": "static/js/main.ce9a14ff.js.map",
   "static\\media\\0C.png": "static/media/0C.4b8b1766.png",
   "static\\media\\0D.png": "static/media/0D.2b1024be.png",
   "static\\media\\0H.png": "static/media/0H.0df35df4.png",
@@ -40,5 +40,6 @@
   "static\\media\\QD.png": "static/media/QD.2df21935.png",
   "static\\media\\QH.png": "static/media/QH.97bab12f.png",
   "static\\media\\QS.png": "static/media/QS.b91ec0a2.png",
-  "static\\media\\StartGame.png": "static/media/StartGame.ba1f0c08.png"
+  "static\\media\\StartGame.png": "static/media/StartGame.ba1f0c08.png",
+  "static\\media\\shirt.png": "static/media/shirt.16ff933d.png"
 }

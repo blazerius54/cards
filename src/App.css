@@ -8,16 +8,11 @@ body{
   background: #1C7430;
 }
 
-#root {
-  
-}
-
 .App {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 600px;
-  
+  min-height: 600px;  
 }
 
 .game {
@@ -41,10 +36,22 @@ body{
   flex: 1 1 15%;
   /* width: 106px; */
   height: 180px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .img-container {
+    height: 140px;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .img-container {
+    height: 100px;
+  }
 }
 
 .game-info {
@@ -85,6 +92,9 @@ body{
   opacity: 0.85;
   background: #FFFFFF;
   border-radius: 4px;
-  height: 30px;
-  
+  height: 30px; 
+}
+
+.start-div *, .game-over-div * {
+  max-width: 100%;
 }

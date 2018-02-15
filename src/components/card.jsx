@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Shirt from '../images/shirt.png'
 class Card extends Component {
     setPickedCard() {
         this.props.setPickedCard(this.props.src, this.props.index)
@@ -15,7 +15,12 @@ class Card extends Component {
           />
         )
       } else {
-        return 'рубашка'
+        return (
+          <img
+          src={Shirt} 
+          alt="" 
+          />
+        )
       }
     }
     

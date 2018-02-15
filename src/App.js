@@ -1,33 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Card from './components/card'
-import startGame from './images/other/StartGame.png'
-import endGame from './images/other/Group2.png'
-
-// function shuffle(array) {
-//   var currentIndex = array.length, temporaryValue, randomIndex;
-
-//   // While there remain elements to shuffle...
-//   while (0 !== currentIndex) {
-
-//     // Pick a remaining element...
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex -= 1;
-
-//     // And swap it with the current element.
-//     temporaryValue = array[currentIndex];
-//     array[currentIndex] = array[randomIndex];
-//     array[randomIndex] = temporaryValue;
-//   }
-
-//   return array;
-// }
-
-// // Used like so
-// var arr = [2, 11, 37, 42];
-// arr = shuffle(arr);
-// console.log(arr);
-
+import Start from './components/start';
+import GameOver from './components/gameover';
+import Card from './components/card';
+import startGame from './images/other/StartGame.png';
+import endGame from './images/other/Group2.png';
 
 function importAll(r) {
   return r.keys().map(r);
@@ -289,39 +266,13 @@ class App extends Component {
         </div>
       )
   }
-  
-  renderStartBtn () {
-      return ( 
-        <div className='start-div'>
-          <img src={startGame}/>
-          <span>MEMORY GAME</span>
-          <button
-          onClick={this.startTheGame.bind(this)}
-          >Начать</button>
-        </div>
-      )
-    
-  }
-
-  renderGameOver () {
-      return (
-        <div className='game-over-div'>
-          <img src={endGame}/>        
-          <p>Поздравляем!</p>
-          <p>Ваш итоговый счёт: {this.state.score}</p>
-          <button
-            onClick={this.startTheGame.bind(this)}
-            >Ещё раз</button>
-        </div>
-      )
-  }
 
   render() {
     return (
       <div className="App">
         {this.state.isGameOn? this.renderGame(): ''}
-        {this.state.isFirstGame? this.renderStartBtn(): ''}
-        {this.state.gameOver? this.renderGameOver(): ''}
+        {this.state.isFirstGame? <Start startTheGame={this.startTheGame.bind(this)}/>: ''}
+        {this.state.gameOver? <GameOver startTheGame={this.startTheGame.bind(this)} score={this.state.score}/>: ''}
       </div>
     );
   }

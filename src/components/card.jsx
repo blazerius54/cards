@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Shirt from '../images/shirt.png'
+import Shirt from '../images/other/shirt.png'
 class Card extends Component {
     setPickedCard() {
         this.props.setPickedCard(this.props.src, this.props.index)

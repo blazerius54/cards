@@ -29,14 +29,11 @@ body{
 .board img {
   max-width: 90%;
   max-height: 90%;
-  /* margin: 20px; */
 }
 
 .img-container {
   flex: 1 1 15%;
-  /* width: 106px; */
   height: 180px;
-  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +59,6 @@ body{
   font-family: OpenSans-Semibold;
   font-size: 20px;
   color: #FFFFFF;
-  /* letter-spacing: -0.25px; */
 }
 
 .start-div, .game-over-div {
